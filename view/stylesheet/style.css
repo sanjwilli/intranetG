@@ -1,0 +1,123 @@
+/* Link */
+a h6, a h6 i {
+  color: #5861de;
+}
+
+/* Footer */
+
+footer h6, footer span {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+/* Button */
+.blue.buttons .button, .blue.button {
+  background-color: #5861de;
+}
+
+/* Sign IN and Sign UP */
+
+.sign_in_up_container {
+  background-color: rgba(255, 255, 255, 1);
+  height: auto;
+  width: 80%;
+  padding: 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1.28571429rem;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.55);
+  box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.55);
+}
+
+.sign_in_up_right {
+  text-align: left;
+  float: left;
+  height: auto;
+  width: 50%;
+}
+
+.sign_in_up_left {
+  float: left;
+  width: 50%;
+  height: auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .sign_in_up_container {
+    width: 50%;
+  }
+}
+/* Main Page */
+
+.header_container{
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+}
+
+.header_container h1 {
+  text-align: center;
+  /* position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%); */
+}
+
+.body_container {
+  width: 100%;
+  margin: 0 10px;
+}
+
+.home_left, .home_middle, .home_right {
+  float: left;
+  height: 100%;
+  width: 31.3333%;
+  margin: 0 5px;
+}
+
+.widget_header {
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  padding: 10px 0px;
+  height: 30px;
+  border-top-right-radius: 1.28571429rem;
+  border-top-left-radius: 1.28571429rem;
+}
+
+.home_left .widget_header {
+  background-color: #1b85b8;
+}
+
+.home_middle .widget_header {
+  background-color: #559e83;
+}
+
+.home_right .widget_header {
+  background-color: #c3cb71;
+}
+
+.widget_header h3 {
+  margin: 0;
+}
+
+.widget_body {
+  height: 200px;
+  overflow: auto;
+  border-bottom-right-radius: 1.28571429rem;
+  border-bottom-left-radius: 1.28571429rem;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+}
+
+.widget_body ul {
+  margin: 0;
+  padding: 0;
+}
+
+.widget_body a li {
+  list-style: none;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}

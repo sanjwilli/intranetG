@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../stylesheet/css-framework/css-framework.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheet/style.css">
+  </head>
+  <body>
+    <?php
+      if (isset($_SESSION)) { ?>
+        <nav class="navbar">
+          <ul>
+            <li><a href=""><button class="circular icon button"><i class="fas fa-home icon"></i></button></a></li>
+            <li><a href=""><button class="circular icon button"><i class="fas fa-file-invoice icon"></i></button></a></li>
+            <li><a href=""><button class="circular icon button"><i class="fas fa-envalope icon"></i></button></a></li>
+          </ul>
+        </nav>
+    <?php  } else { ?>
+      <nav class="navbar">
+
+      </nav>
+    <?php }
+    ?>

@@ -1,0 +1,77 @@
+<?php
+
+/**
+* Display errors
+*
+*/
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
+/**
+* included files
+*
+*/
+//require '../../model/user.php';
+//include_once(DIR_MODEL .'user.php');
+
+/**
+* Check SESSIONS
+*
+*/
+if(isset($_SESSION)) {
+  header('location: view/template/home.phtml');
+}
+include 'header.phtml';
+?>
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../stylesheet/css-framework/css-framework.css" >
+    <link rel="stylesheet" type="text/css" href="../stylesheet/style.css">
+  </head>
+  <body>
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="" alt="Home"><button class="circular icon button"><i class="fas fa-home icon"></i></button></a></li>
+        <li><a href=""><button class="circular icon button"><i class="fas fa-file-invoice icon"></i></button></a></li>
+        <li><a href="" alt="Messages"><button class="circular icon button"><i class="fas fa-envelope icon"></i></button></a></li>
+        <!- <li><a href="" alt="Reports"><button class="circular icon button"><i class="fas fa-file-alt"></i></button></a></li> ->
+      </ul>
+      <form class="form">
+        <div class="field">
+          <input type="text" name="search" placeholder="Search"></input>
+        </div>
+      </form>
+    </nav> -->
+    <div class="sign_in_up_container"> <!-- Container -->
+      <div class="sign_in_up_left"> <!-- Left -->
+        <h1>Sign In <i class="fas fa-chevron-right icon"></i></h1>
+        <a href="sign_up.phtml"><h6>Sign Up <i class="fas fa-user-plus icon"></i></h6></a>
+      </div>
+      <div class="sign_in_up_right"> <!-- Right -->
+        <form class="form">
+          <div class="field">
+            <input type="email" name="email" placeholder="Email">
+          </div>
+          <div class="field">
+            <input type="password" name="password" placeholder="Password">
+          </div>
+          <div class="field">
+            <div class="checkbox">
+              <input type="checkbox" name="checkbox">
+              <label>Remember Me</label>
+            </div>
+          </div>
+          <button class="fuild blue button" type="submit">Sign In</button>
+        </form>
+      </div>
+    </div>
+
+<?php include 'footer.phtml'; ?>

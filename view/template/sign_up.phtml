@@ -1,0 +1,62 @@
+<?php
+
+/**
+* Display errors
+*
+*/
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
+/**
+* included files
+*
+*/
+
+//require '../../model/user.php';
+//require '../../functions/sign_up.php';
+//include_once(DIR_MODEL .'user.php');
+
+/**
+* Check SESSIONS
+*
+*/
+if(isset($_SESSION)) {
+  header('location: view/template/home.phtml');
+}
+include 'header.phtml';
+?>
+<div class="sign_in_up_container"> <!-- Container -->
+  <div class="sign_in_up_left"> <!-- Left -->
+    <h1>Sign Up <i class="fas fa-chevron-right icon"></i></h1>
+    <a href="login.phtml"><h6>Sign In <i class="fas fa-sign-in-alt icon"></i></h6></a>
+  </div>
+  <div class="sign_in_up_right"> <!-- Right -->
+    <form class="form" action="../../functions/sign_up.php" method="post">
+      <div class="two fields">
+        <div class="field">
+          <input type="text" name="first_name" placeholder="First Name">
+        </div>
+        <div class="field">
+          <input type="text" name="last_name" placeholder="Last Name">
+        </div>
+      </div>
+      <div class="field">
+        <input type="text" name="username" placeholder="Username">
+      </div>
+      <div class="field">
+        <input type="email" name="email" placeholder="Email">
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <input type="password" name="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <input type="password" name="confirm_pass" placeholder="Confirm Password">
+        </div>
+      </div>
+      <button class="fuild blue button" type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+<?php include 'footer.phtml'; ?>
