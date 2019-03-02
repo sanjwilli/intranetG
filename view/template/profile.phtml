@@ -1,0 +1,143 @@
+<?php
+
+/**
+* Display errors
+*
+*/
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
+/**
+* Start Session
+*
+*/
+session_start();
+
+/**
+* included files
+*
+*/
+require '../../model/db.php';
+require '../../model/user.php';
+
+/**
+* Check SESSIONS
+*
+*/
+if(!isset($_SESSION["user_id"])) {
+  header('location: login.phtml');
+}
+
+$personal_info = new User;
+
+$personal = $personal_info->get_user($_SESSION['user_id']);
+$address = $personal_info->get_user_address($personal['peronsal_id']);
+
+include 'header.phtml';
+?>
+
+<div class="header_container">
+  <h1>My Profile</h1>
+</div>
+<div class="grid">
+  <div class="six wide column">
+    <h4>Hello Weclome to the Team We are glad to have working here.</h4>
+  </div>
+  <div class="ten wide column">
+
+    <form class="form">
+      <!-- General Profile Information -->
+      <div class="profile_label">
+        <h6>General  <span><i class="fas fa-cog icon"></i></span></h6>
+        <hr>
+      </div>
+      <div class="two fields">
+        <div class="disabled field">
+          <input type="text" name="first_name" value="<?php echo $personal['first_name'] ?>">
+        </div>
+        <div class="disabled field">
+          <input type="text" name="last_name" value="<?php echo $personal['last_name'] ?>">
+        </div>
+      </div>
+      <div class="two fields">
+        <div class=" disabled field">
+          <input type="text" name="username" value="<?php echo $personal['username'] ?>">
+        </div>
+        <div class="disabled field">
+          <input type="email" name="email" placeholder="<?php echo $personal['email'] ?>">
+        </div>
+      </div>
+
+      <!-- Personal Profile Information -->
+      <div class="profile_label">
+        <h6>Personal  <span><i class="fas fa-cog icon"></i></span></h6>
+        <hr>
+      </div>
+      <div class="three fields">
+        <div class="disabled field">
+          <input type="text" name="date_of_birth" placeholder="2019-03-01">
+        </div>
+        <div class="disabled field">
+          <input type="text" name="trn" placeholder="123-456-789">
+        </div>
+        <div class="disabled field">
+          <input type="text" name="nis" placeholder="B-1234">
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="disabled field">
+          <input type="text" name="dl" placeholder="123456789">
+        </div>
+        <div class="disabled field">
+          <input type="text" name="nid" placeholder="1234546">
+        </div>
+      </div>
+
+      <!-- Address Profile Information -->
+      <div class="profile_label">
+        <h6>Address  <span><i class="fas fa-cog icon"></i></span></h6>
+        <hr>
+      </div>
+      <div class="two fields">
+        <div class="disabled field">
+          <input type="text" name="street_no" placeholder="123">
+        </div>
+        <div class="disabled field">
+          <input type="text" name="street" placeholder="example drive">
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <div class="selection disabled dropdown">
+            <input type="hidden" name="town_id">
+            <i class="fas fa-caret-down dropdown icon"></i>
+            <div class="default text">Town</div>
+            <div class="menu">
+              <div class="item" data-value="1">Alston</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="selection disabled dropdown">
+            <input type="hidden" name="parish_id">
+            <i class="fas fa-caret-down dropdown icon"></i>
+            <div class="default text">Parish</div>
+            <div class="menu">
+              <div class="item" data-value="1">Kingston</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="disabled field">
+        <input type="text" name="telephone" placeholder="876-123-4567">
+      </div>
+
+      <button class="circular icon button"><i class="fas fa-plus"></i></button>
+      <span style="font-size: x-small;">Click here to add another phone number field<span>
+
+
+    </form>
+  </div>
+</div>
+<?php include 'footer.phtml'; ?>

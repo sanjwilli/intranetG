@@ -8,10 +8,16 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 /**
+* Session Start
+*
+*/
+session_start();
+/**
 * included files
 *
 */
-require_once '../model/user.php';
+require '../model/db.php';
+require '../model/user.php';
 
 if (!empty($_POST)) {
 
@@ -44,28 +50,28 @@ if (!empty($_POST)) {
 
         $_SESSION[user_id] = $s_id;
 
-        header('location: ../../view/template/home.php');
+        header('location: ../../intranetG/view/template/home.php');
 
       } else {
 
         $msg = "Sorry there must have been an issue creating your account";
-        header("location: ../../view/template/sign_up.phtml?=$msg");
+        header("location: ../../intranetG/view/template/sign_up.phtml?=$msg");
       }
 
     } else {
 
       $msg = "Sorry teh Password and Confirm Password did not match, please try again";
-      header("location: ../../view/template/sign_up.phtml?=$msg");
+      header("location: ../../intranetG/view/template/sign_up.phtml?=$msg");
     }
   } else {
     // email is not in the system
     $msg = "The Email provided already exist in the system";
-    header("location: ../../view/template/sign_up.phtml?=$msg");
+    header("location: ../../intranetG/view/template/sign_up.phtml?=$msg");
   }
 
   // code...
 } else {
-  header("location: ../../view/template/sign_up.phtml");
+  header("location: ../../intranetG/view/template/sign_up.phtml");
 }
 
 

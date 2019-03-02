@@ -1,0 +1,128 @@
+<?php
+
+/**
+* Display errors
+*
+*/
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
+/**
+* Start Session
+*
+*/
+session_start();
+
+/**
+* included files
+*
+*/
+require '../../model/db.php';
+require '../../model/user.php';
+require '../../model/tasks.php';
+
+/**
+* Check SESSIONS
+*
+*/
+if(!isset($_SESSION["user_id"])) {
+  header('location: login.phtml');
+}
+
+$users = new User;
+$task = new Tasks;
+
+$results = $users->get_user_name();
+
+$tasks = $task->get_tasks();
+
+$num_users = count($results);
+
+foreach($results as $row) {
+  $user_name[] = $row['first_name'] . " " . $row['last_name'];
+}
+
+$show_tasks = array();
+
+foreach($tasks as $row) {
+  if(array_key_exists($row['task_name'], $show_tasks)) {
+
+
+    $count = count($show_tasks[$row['task_name']]['Team_Member']);
+
+    $count = $count + 1;
+
+    $name_count = 'name_' . $count;
+
+    $show_tasks[$row['task_name']]['Team_Member'][$name_count] = $row['first_name'] . ' ' . $row['last_name'];
+
+  } else {
+
+
+    $show_tasks[$row['task_name']]['name'] = $row['task_name'];
+
+    $show_tasks[$row['task_name']]['Duration'] = $row['duration_of_task'];
+
+    $show_tasks[$row['task_name']]['Team_Member']['name_1'] = $row['first_name'] . ' ' . $row['last_name'];
+  }
+}
+
+include 'header.phtml';
+?>
+
+<div class="header_container">
+  <h1>Department's Tasks</h1>
+</div>
+<div class="test">
+  <?php
+
+
+
+  ?>
+</div>
+<div class="container">
+  <table class="celled structured table">
+    <thead>
+      <tr>
+        <th rowspan="2">Task</th>
+        <th rowspan="2">Duration</th>
+        <th colspan="<?php echo $num_users; ?>">Team Members</th>
+      </tr>
+      <tr>
+        <?php
+          foreach($user_name as $name) {
+            echo "<th>" . $name . "  </th>";
+          }
+        ?>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        foreach($show_tasks as $i => $a) {
+          echo "<tr>";
+          echo '<td>' . $a['name'] . '</td>';
+          echo '<td>' . $a['Duration'] . '</td>';
+
+          foreach($a['Team_Member'] as $j => $k) {
+            $b[] = array_search($k, $user_name);
+          }
+          //var_dump($b);
+          foreach(array_keys($user_name) as $name) {
+
+            if(in_array($name, $b)) {
+
+              echo '<td><i class="fas fa-check" style="color:#1d945b;"></i></td>';
+
+            } else {
+
+              echo '<td></td>';
+            }
+          }
+          echo "</tr>"; // end of User on Task check
+          $b = array();
+        } // end of loop
+      ?>
+    </tbody>
+  </table>
+</div>
+<?php include 'footer.phtml' ?>

@@ -1,0 +1,23 @@
+<?php
+
+/**
+* Display errors
+*
+*/
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
+/**
+* Start Session
+*
+*/
+session_start();
+
+session_unset();
+
+session_destroy();
+
+$msg = "You Have Successfull Signed Out";
+
+header("location: login.phtml?=$msg");
+?>

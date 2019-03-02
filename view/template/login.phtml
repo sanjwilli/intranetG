@@ -8,6 +8,12 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 /**
+* Start Session
+*
+*/
+session_start();
+
+/**
 * included files
 *
 */
@@ -18,8 +24,8 @@ error_reporting(E_ALL);
 * Check SESSIONS
 *
 */
-if(isset($_SESSION)) {
-  header('location: view/template/home.phtml');
+if(isset($_SESSION["user_id"])) {
+  header('location: home.phtml');
 }
 include 'header.phtml';
 ?>
@@ -56,7 +62,7 @@ include 'header.phtml';
         <a href="sign_up.phtml"><h6>Sign Up <i class="fas fa-user-plus icon"></i></h6></a>
       </div>
       <div class="sign_in_up_right"> <!-- Right -->
-        <form class="form">
+        <form class="form" action="../../functions/sign_in.php" method="post">
           <div class="field">
             <input type="email" name="email" placeholder="Email">
           </div>

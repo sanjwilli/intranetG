@@ -12,13 +12,33 @@
   </head>
   <body>
     <?php
-      if (isset($_SESSION)) { ?>
+      if (isset($_SESSION["user_id"])) { ?>
         <nav class="navbar">
           <ul>
-            <li><a href=""><button class="circular icon button"><i class="fas fa-home icon"></i></button></a></li>
+            <li><a href="home.php"><button class="circular icon button"><i class="fas fa-home icon"></i></button></a></li>
+            <li><a href="tasks.phtml"><button class="circular icon button"><i class="fas fa-tasks icon"></i></button></a></li>
             <li><a href=""><button class="circular icon button"><i class="fas fa-file-invoice icon"></i></button></a></li>
-            <li><a href=""><button class="circular icon button"><i class="fas fa-envalope icon"></i></button></a></li>
+            <li><a href=""><button class="circular icon button"><i class="fas fa-envelope icon"></i></button></a></li>
           </ul>
+          <form class="form">
+            <div class="field">
+              <input type="text" name="search" placeholder="Search"></input>
+            </div>
+          </form>
+          <div class="nav_right">
+            <ul>
+              <div class="icon dropdown button">
+                  <i class="fas fa-cog icon"></i>
+                  <div class="menu" style="right:-15px;">
+                    <div class="header">Display Settings</div>
+                    <a href="profile.phtml" class="item">Profile</a>
+                    <div class="item"><a href="">My Tasks</a></div>
+                    <div class="item"><a href="">Completed</a></div>
+                  </div>
+              </div>
+              <li><a href="sign_out.phtml"><button class="circular icon button"><i class="fas fa-sign-out-alt icon"></i></button></a></li>
+            </ul>
+          </div>
         </nav>
     <?php  } else { ?>
       <nav class="navbar">

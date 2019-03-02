@@ -8,17 +8,24 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 /**
+* Start Session
+*
+*/
+session_start();
+
+/**
 * included files
 *
 */
+require '../../model/db.php';
 require '../../model/user.php';
 
 /**
 * Check SESSIONS
 *
 */
-if(!isset($_SESSION)) {
-  //header('location: view/template/login');
+if(!isset($_SESSION["user_id"])) {
+  header('location: login.phtml');
 }
 
 include ('header.phtml');
@@ -64,3 +71,4 @@ include ('header.phtml');
     </div>
   </div>
 </div>
+<?php include ('footer.phtml'); ?>

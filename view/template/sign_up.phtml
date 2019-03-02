@@ -8,6 +8,12 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 /**
+* Start Session
+*
+*/
+session_start();
+
+/**
 * included files
 *
 */
@@ -20,8 +26,8 @@ error_reporting(E_ALL);
 * Check SESSIONS
 *
 */
-if(isset($_SESSION)) {
-  header('location: view/template/home.phtml');
+if(isset($_SESSION["user_id"])) {
+  header('location: home.phtml');
 }
 include 'header.phtml';
 ?>
