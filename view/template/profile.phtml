@@ -31,7 +31,11 @@ if(!isset($_SESSION["user_id"])) {
 $personal_info = new User;
 
 $personal = $personal_info->get_user($_SESSION['user_id']);
-$address = $personal_info->get_user_address($personal['peronsal_id']);
+$address = $personal_info->get_user_address($personal['personal_id']);
+$emergency = $personal_info->get_user_emergency_info($personal['personal_id']);
+$town = $personal_info->get_town();
+$parish = $personal_info->get_parish();
+$number = $personal_info->get_user_number($personal['personal_id']);
 
 include 'header.phtml';
 ?>
@@ -41,6 +45,15 @@ include 'header.phtml';
 </div>
 <div class="grid">
   <div class="six wide column">
+    <div class="profile_image">
+      <div class="profile_img_container">
+        <h3><?php echo $personal['first_name'][0]; ?></h3>
+        <div class="overlay">
+          <i class="fas fa-file-image"></i>
+
+        </div>
+      </div>
+    </div>
     <h4>Hello Weclome to the Team We are glad to have working here.</h4>
   </div>
   <div class="ten wide column">
@@ -48,94 +61,142 @@ include 'header.phtml';
     <form class="form">
       <!-- General Profile Information -->
       <div class="profile_label">
-        <h6>General  <span><i class="fas fa-cog icon"></i></span></h6>
+        <h6>General </h6>
         <hr>
       </div>
       <div class="two fields">
         <div class="disabled field">
-          <input type="text" name="first_name" value="<?php echo $personal['first_name'] ?>">
+          <input type="text" name="first_name" <?php echo $personal['first_name']==NULL ? 'placeholder="First Name"' : 'value=' . $personal["first_name"]; ?> >
         </div>
         <div class="disabled field">
-          <input type="text" name="last_name" value="<?php echo $personal['last_name'] ?>">
+          <input type="text" name="last_name" <?php echo $personal['last_name']==NULL ? 'placeholder="Last Name"' : 'value=' . $personal["last_name"]; ?> >
         </div>
       </div>
       <div class="two fields">
         <div class=" disabled field">
-          <input type="text" name="username" value="<?php echo $personal['username'] ?>">
+          <input type="text" name="username" <?php echo $personal['username']==NULL ? 'placeholder="Username"' : 'value=' . $personal["username"]; ?> >
         </div>
         <div class="disabled field">
-          <input type="email" name="email" placeholder="<?php echo $personal['email'] ?>">
+          <input type="email" name="email" <?php echo $personal['email']==NULL ? 'placeholder="Email"' : 'value=' . $personal["email"]; ?> >
         </div>
       </div>
 
       <!-- Personal Profile Information -->
       <div class="profile_label">
-        <h6>Personal  <span><i class="fas fa-cog icon"></i></span></h6>
+        <h6>Personal  <span><i class="fas fa-edit icon personal_edit"></i></span></h6>
         <hr>
       </div>
       <div class="three fields">
-        <div class="disabled field">
-          <input type="text" name="date_of_birth" placeholder="2019-03-01">
+        <div class="disabled field p_edit">
+          <input type="text" name="date_of_birth" <?php echo $personal['date_of_birth']==NULL ? 'placeholder="Date of Birth : 2019-03-19"' : 'value=' . $personal["date_of_birth"]; ?> >
         </div>
-        <div class="disabled field">
-          <input type="text" name="trn" placeholder="123-456-789">
+        <div class="disabled field p_edit">
+          <input type="text" name="trn" <?php echo $personal['trn']==NULL ? 'placeholder="TRN : 123-456-789"' : 'value=' . $personal["trn"]; ?> >
         </div>
-        <div class="disabled field">
-          <input type="text" name="nis" placeholder="B-1234">
+        <div class="disabled field p_edit">
+          <input type="text" name="nis" <?php echo $personal['nis']==NULL ? 'placeholder="NIS : B-1234"' : 'value=' . $personal["nis"]; ?> >
         </div>
       </div>
       <div class="two fields">
-        <div class="disabled field">
-          <input type="text" name="dl" placeholder="123456789">
+        <div class="disabled field p_edit">
+          <input type="text" name="dl" <?php echo $personal['dl']==NULL ? 'placeholder="Drivers License"' : 'value=' . $personal["dl"]; ?> >
         </div>
-        <div class="disabled field">
-          <input type="text" name="nid" placeholder="1234546">
+        <div class="disabled field p_edit">
+          <input type="text" name="nid" <?php echo $personal['nid']==NULL ? 'placeholder="National ID"' : 'value=' . $personal["nid"]; ?> >
+        </div>
+      </div>
+
+      <!-- Emergency Profile Information -->
+      <div class="profile_label">
+        <h6>Emergency Contact <span><i class="fas fa-edit icon emergency_edit"></i></span></h6>
+        <hr>
+      </div>
+      <div class="disabled field e_edit">
+        <input type="text" name="emergency_contact" <?php echo $emergency['emergency_contact']==NULL ? 'placeholder="Emergency Conatact"' : 'value=' . $emergency["emergency_contact"]; ?> >
+      </div>
+      <div class="two fields">
+        <div class="disabled field e_edit">
+          <input type="text" name="emergency_telephone" <?php echo $emergency['emergency_telephone']==NULL ? 'placeholder="Phone Number"' : 'value=' . $emergency["emergency_telephone"]; ?> >
+        </div>
+        <div class="disabled field e_edit">
+          <input type="text" name="emergency_email" <?php echo $emergency['emergency_email']==NULL ? 'placeholder="Email"' : 'value=' . $emergency["emergency_email"]; ?> >
         </div>
       </div>
 
       <!-- Address Profile Information -->
       <div class="profile_label">
-        <h6>Address  <span><i class="fas fa-cog icon"></i></span></h6>
+        <h6>Address  <span><i class="fas fa-edit icon address_edit"></i></span></h6>
         <hr>
       </div>
       <div class="two fields">
-        <div class="disabled field">
-          <input type="text" name="street_no" placeholder="123">
+        <div class="disabled field a_edit">
+          <input type="text" name="street_no" <?php echo $address['street_no']==NULL ? 'placeholder="Street Number : 123"' : 'value=' . $address["street_no"]; ?> >
         </div>
-        <div class="disabled field">
-          <input type="text" name="street" placeholder="example drive">
+        <div class="disabled field a_edit">
+          <input type="text" name="street" <?php echo $address['street']==NULL ? 'placeholder="Street"' : 'value=' . $address["street"]; ?> >
         </div>
       </div>
       <div class="two fields">
         <div class="field">
-          <div class="selection disabled dropdown">
+          <div class="selection disabled dropdown a_edit">
             <input type="hidden" name="town_id">
             <i class="fas fa-caret-down dropdown icon"></i>
             <div class="default text">Town</div>
             <div class="menu">
-              <div class="item" data-value="1">Alston</div>
+              <?php
+                foreach ($town as $i => $a) {
+                  $id = $a['town_id'];
+                  $name = $a['town'];
+                  echo "<div class='item'data-value='" . $id . "'>" . $name . "</div>";
+                }
+              ?>
             </div>
           </div>
         </div>
         <div class="field">
-          <div class="selection disabled dropdown">
+          <div class="selection disabled dropdown a_edit">
             <input type="hidden" name="parish_id">
             <i class="fas fa-caret-down dropdown icon"></i>
             <div class="default text">Parish</div>
             <div class="menu">
-              <div class="item" data-value="1">Kingston</div>
+              <?php
+                foreach ($parish as $i => $a) {
+                  $id = $a['parish_id'];
+                  $name = $a['parish'];
+                  echo "<div class='item'data-value='" . $id . "'>" . $name . "</div>";
+                }
+              ?>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="disabled field">
-        <input type="text" name="telephone" placeholder="876-123-4567">
-      </div>
+      <?php
+        if(count($number) > 0) {
+
+          foreach ($number as $i => $a) {
+            $num = a['telephone'];
+            echo '<div class="disabled field a_edit">
+              <input type="text" name="telephone" value="' . $num . '"
+            </div>';
+          }
+        } else {
+          echo '<div class="disabled field a_edit">
+                  <input type="text" name="telephone" placeholder="Phone Number : 876-123-4567">
+                </div>';
+        }
+
+      ?>
+      <!-- <div class="disabled field a_edit">
+        <input type="text" name="telephone" >
+      </div> -->
 
       <button class="circular icon button"><i class="fas fa-plus"></i></button>
-      <span style="font-size: x-small;">Click here to add another phone number field<span>
+      <span style="font-size: x-small;">Click here to add another phone number field</span>
 
+      <div class="save_button">
+        <button class="green button" type="submit">Save</button>
+      </div>
 
     </form>
   </div>

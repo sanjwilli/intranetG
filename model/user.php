@@ -109,15 +109,53 @@ class User extends DB {
   }
 
   /**
-  * get_user_address(): gets the user address information
+  * get_user_emergency_info(): gets the user emergency contact
   *
   */
-  public function get_user_address($user_id) {
-    $sql = $this->connect()->query("SELECT telephone_info.telephone, address_info.street_no, address_info.street, address_info.town_id FROM testIntranet.personal_info INNER JOIN testIntranet.address_info ON personal_info.personal_id = address_info.personal_id INNER JOIN testIntranet.telephone_info ON personal_info.personal_id = telephone_info.personal_id WHERE personal_info.personal_id = '$user_id'");
+  public function get_user_emergency_info($s_id) {
+    $sql = $this->connect()->query("SELECT emergency_info.emergency_contact, emergency_info.emergency_telephone, emergency_info.emergency_email FROM testIntranet.personal_info INNER JOIN testIntranet.emergency_info ON emergency_info.personal_id = personal_info.personal_id WHERE personal_info.personal_id = '$s_id'");
 
     $results = $sql->fetch_array(MYSQLI_BOTH);
 
     return $results;
+  }
+
+  /**
+  * get_user_address(): gets the user address information
+  *
+  */
+  public function get_user_address($user_id) {
+    $sql = $this->connect()->query("SELECT address_info.street_no, address_info.street, address_info.town_id FROM testIntranet.personal_info INNER JOIN testIntranet.address_info ON personal_info.personal_id = address_info.personal_id WHERE personal_info.personal_id = '$user_id'");
+
+    $results = $sql->fetch_array(MYSQLI_BOTH);
+
+    return $results;
+  }
+
+  /**
+  * get_user_number(): gets the user phone numbers
+  *
+  */
+  public function get_user_number($s_id) {
+    $sql = $this->connect()->query("SELECT telephone_info.telephone FROM testIntranet.personal_info INNER JOIN testIntranet.telephone_info ON personal_info.personal_id = telephone_info.personal_id WHERE personal_info.personal_id = '$s_id'");
+
+    if ($sql->num_rows > 0) {
+
+      while($row = $sql->fetch_array()) {
+
+        $numbers[] = $row;
+
+      }
+
+      return $numbers;
+
+    } else {
+
+      $numbers = array();
+      
+      return $numbers;
+    }
+
   }
 
   /**
@@ -131,6 +169,34 @@ class User extends DB {
     $results = $sql->fetch_array(MYSQLI_BOTH);
 
     return $results['user_id'];
+  }
+
+  /**
+  * get_town(): get the list of towns
+  *
+  */
+  public function get_town() {
+    $sql = $this->connect()->query("SELECT town.town_id, town.town FROM testIntranet.town");
+
+    while ($row = $sql->fetch_array()) {
+      $towns[] = $row;
+    }
+
+    return $towns;
+  }
+
+  /**
+  * get_parish(): get the list of towns
+  *
+  */
+  public function get_parish() {
+    $sql = $this->connect()->query("SELECT parish.parish_id, parish.parish FROM testIntranet.parish");
+
+    while ($row = $sql->fetch_array()) {
+      $parishs[] = $row;
+    }
+
+    return $parishs;
   }
 }
 

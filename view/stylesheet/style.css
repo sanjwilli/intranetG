@@ -169,3 +169,8 @@ footer h6{
   right: 15px;
   cursor: pointer;
 }
+
+.save_button {
+  display: none;
+  margin-top: 25px;
+}
